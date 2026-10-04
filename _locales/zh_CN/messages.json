@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "RankLens",
+    "description": "Extension name."
+  },
+  "extDesc": {
+    "message": "在 dblp、Google 学术、Connected Papers、Semantic Scholar、Web of Science、论文原网站（ScienceDirect、Springer、IEEE、ACM、Wiley、MDPI、Nature、arXiv）及会议网站（ACL Anthology、OpenReview、PMLR、NeurIPS、CVF、USENIX、AAAI）上显示 CCF 推荐等级、中科院期刊分区（SCI）与新锐期刊分区。",
+    "description": "Extension description."
+  }
+}

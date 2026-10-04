@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "RankLens",
+    "description": "Extension name."
+  },
+  "extDesc": {
+    "message": "Shows CCF recommended ranks, CAS journal partitions (SCI) and XinRui journal partitions on dblp, Google Scholar, Connected Papers, Semantic Scholar, Web of Science, publisher sites (ScienceDirect, Springer, IEEE, ACM, Wiley, MDPI, Nature, arXiv) and conference sites (ACL Anthology, OpenReview, PMLR, NeurIPS, CVF, USENIX, AAAI).",
+    "description": "Extension description."
+  }
+}

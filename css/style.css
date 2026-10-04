@@ -1,0 +1,143 @@
+.ccf-rank.ccf-rank {
+  display: inline-block !important;
+  box-sizing: content-box !important;
+  width: auto !important;
+  max-width: none !important;
+  float: none !important;
+  height: 18.35px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  white-space: nowrap !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+  color: #ffffff !important;
+  border-radius: 9px !important;
+  padding: 1px 8px !important;
+  margin: 0 5px !important;
+  line-height: normal !important;
+  vertical-align: middle !important;
+}
+
+.ccf-a {
+  background-color: #e15f37;
+}
+
+.ccf-b {
+  background-color: #f5bd42;
+}
+
+.ccf-c {
+  background-color: #8eba3a;
+}
+
+.ccf-e {
+  background-color: #4aa3ea;
+}
+
+.ccf-p {
+  background-color: #6c757d;
+}
+
+.ccf-none {
+  background-color: #6c757d;
+}
+
+/* SCI (中科院分区表升级版) badges */
+.sci-1 {
+  background-color: #d63031;
+}
+
+.sci-2 {
+  background-color: #e17055;
+}
+
+.sci-3 {
+  background-color: #0984e3;
+}
+
+.sci-4 {
+  background-color: #b2bec3;
+}
+
+.sci-none {
+  background-color: #b2bec3;
+  font-weight: normal;
+}
+
+/* 新锐期刊分区表 badges */
+.xr-1 {
+  background-color: #6c5ce7;
+}
+
+.xr-2 {
+  background-color: #a29bfe;
+}
+
+.xr-3 {
+  background-color: #74b9ff;
+}
+
+.xr-4 {
+  background-color: #dfe6e9;
+  color: #2d3436;
+  text-shadow: none;
+}
+
+.xr-none {
+  background-color: #dfe6e9;
+  color: #2d3436;
+  text-shadow: none;
+  font-weight: normal;
+}
+
+.ei-listed {
+  background-color: #087f8c;
+}
+
+.ei-discontinued {
+  background-color: #6c757d;
+}
+
+/* Top-journal accent ring on SCI/XR badges */
+span.ccf-rank.sci-top {
+  box-shadow: 0 0 0 2px #fdcb6e inset;
+}
+
+span.ccf-rank.xr-top {
+  box-shadow: 0 0 0 2px #ffeaa7 inset;
+}
+
+/* empty placeholder used when a badge does not apply (conferences etc.) */
+.ccf-rank-hidden {
+  display: none;
+}
+
+.ccf-tooltip {
+  display: inline-block !important;
+  position: relative !important;
+}
+
+/* Hardened against host-page CSS: without position:relative on the badge and
+   position:absolute on the tooltip, the hidden tooltip anchors to the page
+   and creates phantom bottom strips / horizontal scrollbars. */
+.ccf-tooltip .ccf-tooltiptext {
+  visibility: hidden !important;
+  position: absolute !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: max-content !important;
+  max-width: 480px !important;
+  white-space: pre-wrap !important;
+  overflow: hidden !important;
+  background-color: #007bff !important;
+  border-radius: 6px !important;
+  padding: 5px 5px !important;
+  bottom: 100% !important;
+  left: 50% !important;
+  margin-left: -60px !important;
+  z-index: 980624 !important;
+  text-align: left !important;
+}
+
+.ccf-tooltip:hover .ccf-tooltiptext {
+  visibility: visible !important;
+}

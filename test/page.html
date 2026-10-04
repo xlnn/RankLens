@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>CCFrank+SCI+新锐 badge test</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/filter.css">
+<script src="../lib/jquery-3.5.1.min.js"></script>
+<script src="../js/ccf.js"></script>
+<script src="../js/sci.js"></script>
+<script src="../js/xr.js"></script>
+<script src="../js/publisher.js"></script>
+<script src="../data/ccfRankAbbr.js"></script>
+<script src="../data/ccfRankFull.js"></script>
+<script src="../data/ccfRankDb.js"></script>
+<script src="../data/ccfRankUrl.js"></script>
+<script src="../data/ccfFullUrl.js"></script>
+<script src="../data/ccfAbbrFull.js"></script>
+<script src="../data/sciRankUrl.js"></script>
+<script src="../data/sciRankUrlMeta.js"></script>
+<script src="../data/xrRankUrl.js"></script>
+<script src="../data/xrRankUrlMeta.js"></script>
+<style>
+  body { font: 14px/1.9 "Segoe UI", "Microsoft YaHei", sans-serif; padding: 24px; background: #fafafa; }
+  h3 { margin: 12px 0 4px; }
+  .row { margin: 6px 0; }
+  .lbl { display: inline-block; width: 330px; color: #555; }
+</style>
+</head>
+<body>
+<h2>CCF + SCI(中科院2025) + 新锐(2026) 徽标测试页</h2>
+<div id="cases"></div>
+<script>
+const cases = [
+  ["url", "/journals/tocs/tocs", "ACM TOCS (CCF A)"],
+  ["url", "/journals/tmc/tmc", "IEEE TMC (CCF B)"],
+  ["url", "/journals/pami/pami", "IEEE TPAMI (CCF A)"],
+  ["url", "/journals/cn/cn", "Computer Networks (CCF B)"],
+  ["url", "/journals/access/access", "IEEE Access (non-CCF)"],
+  ["url", "/journals/tit/tit", "IEEE Trans. Info. Theory"],
+  ["url", "/journals/pnas/pnas", "PNAS"],
+  ["url", "/journals/jeric/toce", "TOCE subkey variant"],
+  ["url", "/journals/pacmpl/pacmpl", "PACMPL (journal)"],
+  ["url", "/conf/acl/acl", "ACL (conf, XR conf table)"],
+  ["url", "/conf/nips/nips", "NeurIPS (conf, XR conf table)"],
+  ["url", "/conf/icse/icse", "ICSE (conf, XR conf table)"],
+  ["url", "/conf/aaai/aaai", "AAAI (conf, no XR conf entry)"],
+  ["url", "/journals/imwut/imwut", "IMWUT (non-CCF?)"],
+  ["publication", "IEEE TRANSACTIONS ON MOBILE COMPUTING", "WoS publication name TMC"],
+  ["publication", "ACM Computing Surveys", "WoS publication name CSUR"],
+  ["publication", "Symmetry-Basel", "WoS publication name Symmetry"],
+  ["abbr", "CVPR", "abbr CVPR (XR conf)"],
+  ["abbr", "TMC", "abbr TMC (journal abbr, hidden)"],
+  ["url", "", "empty url (hidden for sci/xr)"],
+];
+const out = $("#cases");
+for (const [type, refine, label] of cases) {
+  const row = $("<div>").addClass("row");
+  row.append($("<span>").addClass("lbl").text(label + "  [" + type + "]"));
+  row.append(ccf.getRankSpan(refine, type));
+  row.append(sci.getRankSpan(refine, type));
+  row.append(xr.getRankSpan(refine, type));
+  out.append(row);
+}
+
+// publisher adapter simulation (ScienceDirect-style citation metas)
+// register spans the way script.js does in the real extension
+pub.rankSpanList.push(ccf.getRankSpan, sci.getRankSpan, xr.getRankSpan);
+// stub the dblp-network fallback (fetchRank.js needs chrome.runtime)
+window.fetchRank = function (node, title, author, year, site) {
+  node.after($("<span>").addClass("ccf-rank").text("[dblp-fallback:" + title.slice(0, 12) + "]"));
+};
+const simHead = $("<h1>").prependTo(document.body).text("publisher-sim");
+const simOut = $("<div>").appendTo("#cases");
+const sims = [
+  ["ScienceDirect", "Information Processing & Management", null],
+  ["ScienceDirect", "Expert Systems with Applications", null],
+  ["Springer", "World Wide Web-Internet and Web Information Systems", null],
+  ["未收录期刊", "Internet of Things", null],
+  ["会议页面", null, "IEEE/CVF Computer Vision and Pattern Recognition Conference"],
+  ["无meta期刊(回退dblp)", "", null],
+];
+for (const [site, journal, conf] of sims) {
+  simHead[0].dataset.ccfRanked = "";
+  simHead.nextAll(".ccf-rank, .ccf-rank-hidden").remove();
+  $('meta[name="citation_journal_title"], meta[name="citation_conference_title"]').remove();
+  $('meta[name="citation_title"]').remove();
+  if (journal) $("head").append(`<meta name="citation_journal_title" content="${journal}">`);
+  if (conf) $("head").append(`<meta name="citation_conference_title" content="${conf}">`);
+  $("head").append('<meta name="citation_title" content="Simulated paper">');
+  simHead.text(site + ": " + (journal || conf || "(no venue meta)"));
+  pub.appendRank();
+  const badges = simHead.nextAll(".ccf-rank").map((_, b) => b.textContent.split("\n")[0]).get();
+  simOut.append($("<div>").addClass("row").text(`[${site}] ${journal || conf || "fallback"} => ${badges.join(" | ") || "(nothing)"}`));
+}
+$('meta[name="citation_journal_title"], meta[name="citation_conference_title"], meta[name="citation_title"]').remove();
+simHead.remove();
+</script>
+</body>
+</html>

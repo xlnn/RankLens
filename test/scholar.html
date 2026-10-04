@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>Google Scholar simulation - real truncated venue</title>
+<script src="../lib/jquery-3.5.1.min.js"></script>
+<script src="../js/apiCache.js"></script>
+<script src="../js/ccf.js"></script>
+<script src="../js/sci.js"></script>
+<script src="../js/xr.js"></script>
+<script src="../js/publisher.js"></script>
+<script src="../js/ei.js"></script>
+<script src="../js/fetchRank.js"></script>
+<script src="../js/scholar.js"></script>
+<script src="../data/ccfRankAbbr.js"></script>
+<script src="../data/ccfRankFull.js"></script>
+<script src="../data/ccfRankDb.js"></script>
+<script src="../data/ccfRankUrl.js"></script>
+<script src="../data/ccfFullUrl.js"></script>
+<script src="../data/ccfAbbrFull.js"></script>
+<script src="../data/sciRankUrl.js"></script>
+<script src="../data/sciRankUrlMeta.js"></script>
+<script src="../data/xrRankUrl.js"></script>
+<script src="../data/xrRankUrlMeta.js"></script>
+<script src="../data/rankNameIdx.js"></script>
+<script src="../data/eiIndex.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<style>body{font:15px/1.7 "Segoe UI",sans-serif;padding:24px;background:#fff;} .gs_ri{margin-bottom:26px;max-width:680px;} h3 a{color:#1a0dab;font-size:17px;text-decoration:none;} .gs_a{color:#006621;font-size:13px;} .gs_rs{color:#444;font-size:13px;}</style>
+</head>
+<body>
+<div id="gs_res_ccl_mid">
+  <div><div class="gs_ri">
+    <h3><a href="#">Biomimetic Iridium-Based Photothermal Nanozyme to Trigger Ferroptosis and Pyroptosis and Activate the cGAS-STING Pathway</a></h3>
+    <div class="gs_a">L Ding, Z Fan, G Xia, F Zhu, N Yang, S Yu… - Advanced …, 2026 - Wiley Online Library</div>
+    <div class="gs_rs">Although nanozymes are potential tumor therapeutics due to their ability to disrupt intracellular redox homeostasis...</div>
+  </div></div>
+</div>
+<script>
+chrome = { runtime: { getManifest: function(){ return { version: "1.1.0-test" }; } } };
+scholar.rankSpanList.push(xr.getRankSpan, sci.getRankSpan, ccf.getRankSpan);
+scholar.appendRank();
+</script>
+</body>
+</html>

@@ -3,10 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="RankLens — 在学术检索、出版社与会议论文页面中快速识别 CCF、中科院分区、新锐分区与 EI 来源状态。" />
-  <meta name="theme-color" content="#080c18" />
-  <title>RankLens — Academic Venue Rankings at a Glance</title>
+  <meta name="description" content="RankLens — 在 dblp、Google Scholar、IEEE Xplore 等 26+ 学术网站上，直接显示 CCF 等级、中科院分区、新锐分区与 EI 收录状态的浏览器扩展。开源 · 本地优先 · 无追踪。" />
+  <meta name="theme-color" content="#060a17" />
+  <meta property="og:title" content="RankLens — 论文等级，一眼看见" />
+  <meta property="og:description" content="在熟悉的学术网站上直接显示 CCF 等级、中科院分区、新锐分区与 EI 收录状态。开源 · 本地优先 · 无追踪。" />
+  <meta property="og:type" content="website" />
+  <title>RankLens — 论文等级，一眼看见</title>
   <link rel="icon" href="./icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="./styles.css" />
   <script>
     // Apply the saved theme before first paint to avoid flashing.
@@ -20,152 +29,198 @@
 </head>
 <body>
   <div class="bg-grid"></div>
-  <div class="glow glow-a"></div>
-  <div class="glow glow-b"></div>
+  <div class="aurora aurora-a"></div>
+  <div class="aurora aurora-b"></div>
+  <div class="aurora aurora-c"></div>
 
-  <header class="nav wrap">
-    <a class="brand" href="#top" aria-label="RankLens">
-      <img src="./icon.png" alt="RankLens logo" />
-      <span>RankLens</span>
-    </a>
-    <nav>
-      <a href="#features">功能</a>
-      <a href="#coverage">覆盖</a>
-      <a href="#sites">站点</a>
-      <a href="#install">安装</a>
-      <a href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">GitHub ↗</a>
-    </nav>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换暗色 / 亮色主题" title="切换主题">
-      <svg class="sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
-        <circle cx="12" cy="12" r="4.6" fill="currentColor"/>
-        <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/>
-          <line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/>
-          <line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/>
-          <line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/>
-        </g>
-      </svg>
-      <svg class="moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
-        <path fill="currentColor" d="M20.6 14.6A8.8 8.8 0 0 1 9.4 3.4 9.2 9.2 0 1 0 20.6 14.6z"/>
-      </svg>
-    </button>
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="RankLens">
+        <img src="./icon.png" alt="RankLens logo" />
+        <span>RankLens</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features">功能</a>
+        <a href="#how">用法</a>
+        <a href="#sites">站点</a>
+        <a class="btn primary nav-cta" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
+          免费安装
+        </a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换暗色 / 亮色主题" title="切换主题">
+        <svg class="sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.6" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/>
+            <line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/>
+            <line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/>
+            <line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/>
+          </g>
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+          <path fill="currentColor" d="M20.6 14.6A8.8 8.8 0 0 1 9.4 3.4 9.2 9.2 0 1 0 20.6 14.6z"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <main id="top">
+    <!-- ============ hero ============ -->
     <section class="hero wrap">
       <div class="hero-copy">
         <div class="eyebrow">Academic venue intelligence · Browser extension</div>
-        <h1>一眼看懂论文所在<br /><span>期刊与会议等级</span></h1>
+        <h1>论文的等级，<br /><span>打开页面就能看见</span></h1>
         <p class="lead">
-          RankLens 将 <strong>CCF 推荐等级</strong>、<strong>中科院期刊分区</strong>、
-          <strong>新锐分区</strong> 与可追溯的 <strong>EI Compendex 来源状态</strong>
-          直接带到你常用的学术网页中。
+          在 dblp、Google Scholar、IEEE Xplore 等 <strong>26+ 学术站点</strong>上，
+          RankLens 直接把 <strong>CCF 等级</strong>、<strong>中科院分区</strong>、
+          <strong>新锐分区</strong> 与 <strong>EI 收录状态</strong> 显示在论文旁边——
+          不用再开三四个榜单页来回对照。
         </p>
 
         <div class="cta-row">
           <a class="btn primary" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
-            获取 RankLens
+            免费安装扩展
           </a>
           <a class="btn ghost" href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">
-            查看源码
+            查看源码 ↗
           </a>
         </div>
 
-        <div class="mini-note">Manifest V3 · Chrome / Edge · 开源 · 本地匹配优先</div>
+        <div class="mini-note">Chrome · Edge · Firefox · Brave · Opera　|　MIT 开源　|　本地优先匹配　|　无分析服务器</div>
       </div>
 
-      <div class="hero-card" aria-label="RankLens preview">
-        <div class="window-bar">
-          <i></i><i></i><i></i>
-          <span>scholar.google.com</span>
-        </div>
+      <div class="hero-stage" aria-label="RankLens 效果预览">
+        <span class="float-chip fc-a">CCF A</span>
+        <span class="float-chip fc-b">SCI 1区 · Top</span>
+        <span class="float-chip fc-c">新锐 1区</span>
+        <span class="float-chip fc-d">EI</span>
 
-        <div class="paper-card">
-          <div class="paper-title">A Unified Framework for Trustworthy Multimodal Learning</div>
-          <div class="paper-meta">Journal / Conference venue</div>
-
-          <div class="badges">
-            <span class="badge ccf">CCF A</span>
-            <span class="badge sci top">SCI 1区 <i>Top</i></span>
-            <span class="badge xr">新锐 1区</span>
-            <span class="badge ei">EI</span>
+        <div class="hero-card">
+          <div class="window-bar">
+            <i></i><i></i><i></i>
+            <span>scholar.google.com</span>
           </div>
 
-          <div class="tooltip">
-            <b>RankLens</b>
-            <span>悬停徽标即可查看大类学科、分区位次、Top 标记与收录详情。</span>
-          </div>
-        </div>
+          <div class="paper-list">
+            <div class="paper-card">
+              <div class="paper-title">A Unified Framework for Trustworthy Multimodal Learning</div>
+              <div class="paper-meta">Journal / Conference venue</div>
+              <div class="badges">
+                <span class="badge ccf">CCF A</span>
+                <span class="badge sci top">SCI 1区 <i>Top</i></span>
+                <span class="badge xr">新锐 1区</span>
+                <span class="badge ei">EI</span>
+              </div>
+              <div class="tooltip">
+                <b>RankLens</b>
+                <span>悬停徽标即可查看大类学科、分区位次、Top 标记与收录详情。</span>
+              </div>
+            </div>
 
-        <div class="paper-card dim">
-          <div class="paper-title">Robust Learning under Distribution Shift</div>
-          <div class="paper-meta">Publisher page · journal home</div>
-          <div class="badges">
-            <span class="badge ccf b">CCF B</span>
-            <span class="badge sci z2">SCI 2区</span>
-            <span class="badge ei stop">EI Stop</span>
+            <div class="paper-card dim">
+              <div class="paper-title">Robust Learning under Distribution Shift</div>
+              <div class="paper-meta">Publisher page · journal home</div>
+              <div class="badges">
+                <span class="badge ccf b">CCF B</span>
+                <span class="badge sci z2">SCI 2区</span>
+                <span class="badge ei stop">EI Stop</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="metrics wrap" id="coverage">
-      <div><strong>21,771</strong><span>期刊名称索引</span></div>
-      <div><strong>59,000+</strong><span>ISSN 精确映射</span></div>
-      <div><strong>1,237</strong><span>dblp 精确映射</span></div>
-      <div><strong>26+</strong><span>主流学术站点</span></div>
+    <!-- ============ metrics ============ -->
+    <section class="metrics wrap" id="data">
+      <div><strong data-count="21771">0</strong><span>期刊名称索引</span></div>
+      <div><strong data-count="59000" data-suffix="+">0</strong><span>ISSN 精确映射</span></div>
+      <div><strong data-count="26" data-suffix="+">0</strong><span>主流学术站点</span></div>
+      <div><strong>0</strong><span>浏览数据上传</span></div>
     </section>
 
+    <!-- ============ features ============ -->
     <section class="section wrap" id="features">
       <div class="section-head">
         <span>Why RankLens</span>
-        <h2>把“查等级”变成网页上的即时信息</h2>
-        <p>减少在不同榜单、检索库和出版社页面之间反复切换，把 venue-level 信息直接显示在论文旁边。</p>
+        <h2>把「查等级」变成打开页面就有的信息</h2>
+        <p>不用记住榜单、不用来回切换网页——论文旁边的等级信息，RankLens 已经帮你放好。</p>
       </div>
 
       <div class="feature-grid">
         <article>
           <div class="icon ccf-ic">A</div>
           <h3>CCF 推荐等级</h3>
-          <p>直接显示 CCF A / B / C 等级，已对齐 2026 最新目录，适合计算机领域会议与期刊快速识别。</p>
+          <p>对齐 CCF 2026 最新目录，A / B / C 一眼识别，计算机领域的会议与期刊全覆盖。</p>
         </article>
 
         <article>
           <div class="icon sci-ic">1</div>
           <h3>中科院分区</h3>
-          <p>展示 1–4 区、Top、大类、位次与预警信息；全学科 21,771 种期刊名称索引，不止计算机领域。</p>
+          <p>1–4 区、Top、大类与位次一目了然；全学科 21,771 种期刊名称索引，不止计算机领域。</p>
         </article>
 
         <article>
           <div class="icon xr-ic">新</div>
           <h3>新锐期刊分区</h3>
-          <p>原中科院分区团队出品的新锐分区表，补充分区、Top、数据库覆盖及审核警示，为选刊提供更多上下文。</p>
+          <p>原中科院分区团队出品的新锐分区表，补充分区、Top 与数据库覆盖，为选刊提供更多视角。</p>
         </article>
 
         <article>
           <div class="icon ei-ic">EI</div>
           <h3>EI 可追溯状态</h3>
-          <p>仅基于本地生成的 Elsevier Compendex 官方来源表快照显示，避免把推测当成事实。</p>
+          <p>仅基于本地生成的 Elsevier Compendex 官方来源表快照显示，绝不拿其他指标“推测”收录。</p>
         </article>
 
         <article>
           <div class="icon">◎</div>
           <h3>智能匹配与回退</h3>
-          <p>优先使用 dblp、ISSN 与完整 venue 名称；必要时再通过 OpenAlex / Crossref 恢复元数据。</p>
+          <p>优先 dblp、ISSN 与完整 venue 名称；识别不到时再由 OpenAlex / Crossref 恢复元数据。</p>
         </article>
 
         <article>
           <div class="icon">◈</div>
           <h3>隐私优先</h3>
-          <p>大部分匹配在本地完成，仅在本地无法识别 venue 时发起必要的元数据查询，且不上传浏览历史。</p>
+          <p>大部分匹配在本地完成，不上传浏览历史，无分析服务器，Manifest V3 下声明最少权限。</p>
         </article>
       </div>
     </section>
 
+    <!-- ============ how it works ============ -->
+    <section class="section wrap how" id="how">
+      <div class="section-head">
+        <span>How it works</span>
+        <h2>三步开始使用</h2>
+        <p>从安装到看见第一个等级徽标，只需要几分钟。</p>
+      </div>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <b class="step-num">01</b>
+          <h3>安装 RankLens</h3>
+          <p>下载 Release 或克隆源码，在 Chrome / Edge 的开发者模式下加载扩展目录。</p>
+        </article>
+        <article class="step-card">
+          <b class="step-num">02</b>
+          <h3>打开任意学术网页</h3>
+          <p>dblp、Google Scholar、检索库、出版社与会议论文集页面——都支持。</p>
+        </article>
+        <article class="step-card">
+          <b class="step-num">03</b>
+          <h3>等级自动出现</h3>
+          <p>CCF、中科院分区、新锐分区与 EI 徽标，直接显示在论文标题旁边。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ supported sites ============ -->
     <section class="section wrap supported" id="sites">
       <div class="section-head">
         <span>Supported websites</span>
-        <h2>覆盖研究工作流中的常用站点</h2>
+        <h2>覆盖你的整个研究工作流</h2>
+        <p>检索库、出版社、会议论文集——你在哪里读论文，等级就显示在哪里。</p>
       </div>
 
       <div class="site-cloud">
@@ -179,7 +234,7 @@
         <span>SpringerLink</span>
         <span>ScienceDirect</span>
         <span>Wiley</span>
-        <span>Taylor & Francis</span>
+        <span>Taylor &amp; Francis</span>
         <span>MDPI</span>
         <span>Nature</span>
         <span>arXiv</span>
@@ -193,31 +248,19 @@
       </div>
     </section>
 
-    <section class="section wrap install" id="install">
-      <div class="install-copy">
-        <span class="kicker">Get started</span>
-        <h2>几分钟完成安装</h2>
-        <p>
-          下载源码或 Release，在 Chrome / Edge 中开启开发者模式并加载包含
-          <code>manifest.json</code> 的目录。
-        </p>
-
-        <div class="cta-row">
-          <a class="btn primary" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
-            前往 Releases
-          </a>
-          <a class="btn ghost" href="https://github.com/xlnn/RankLens#installation" target="_blank" rel="noreferrer">
-            安装说明
-          </a>
-        </div>
+    <!-- ============ final CTA ============ -->
+    <section class="cta wrap">
+      <h2>下一篇文章，直接带等级。</h2>
+      <p>安装之后打开 dblp 或 Google Scholar，等级徽标已经在等你了。</p>
+      <div class="cta-row">
+        <a class="btn primary" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
+          免费安装扩展
+        </a>
+        <a class="btn ghost" href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">
+          查看源码 ↗
+        </a>
       </div>
-
-      <ol class="steps">
-        <li><b>01</b><span>下载或克隆 RankLens</span></li>
-        <li><b>02</b><span>打开 <code>chrome://extensions</code></span></li>
-        <li><b>03</b><span>开启 Developer mode</span></li>
-        <li><b>04</b><span>选择“Load unpacked”</span></li>
-      </ol>
+      <div class="mini-note">开源（MIT）· Manifest V3 · 本地优先 · 无分析服务器</div>
     </section>
   </main>
 
@@ -232,7 +275,7 @@
 
     <div class="footer-links">
       <a href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://github.com/xlnn/RankLens/blob/main/PrivacyPolicy.md" target="_blank" rel="noreferrer">Privacy</a>
+      <a href="https://github.com/xlnn/RankLens/blob/main/PrivacyPolicy.md" target="_blank" rel="noreferrer">隐私政策</a>
       <a href="https://github.com/xlnn/RankLens/blob/main/LICENSE" target="_blank" rel="noreferrer">License</a>
     </div>
   </footer>

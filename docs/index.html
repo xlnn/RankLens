@@ -3,26 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="RankLens — 在学术检索、出版社与会议论文页面中快速识别 CCF、中科院、新锐与 EI 来源状态。" />
+  <meta name="description" content="RankLens — 在学术检索、出版社与会议论文页面中快速识别 CCF、中科院分区、新锐分区与 EI 来源状态。" />
   <meta name="theme-color" content="#080c18" />
   <title>RankLens — Academic Venue Rankings at a Glance</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/xlnn/RankLens/main/icon/128x128.png" />
+  <link rel="icon" href="./icon.png" />
   <link rel="stylesheet" href="./styles.css" />
+  <script>
+    // Apply the saved theme before first paint to avoid flashing.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("ranklens-theme"); } catch (e) {}
+      var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
 </head>
 <body>
   <div class="bg-grid"></div>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
 
   <header class="nav wrap">
     <a class="brand" href="#top" aria-label="RankLens">
-      <img src="https://raw.githubusercontent.com/xlnn/RankLens/main/icon/128x128.png" alt="RankLens logo" />
+      <img src="./icon.png" alt="RankLens logo" />
       <span>RankLens</span>
     </a>
     <nav>
       <a href="#features">功能</a>
       <a href="#coverage">覆盖</a>
+      <a href="#sites">站点</a>
       <a href="#install">安装</a>
       <a href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">GitHub ↗</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换暗色 / 亮色主题" title="切换主题">
+      <svg class="sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.6" fill="currentColor"/>
+        <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/>
+          <line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/>
+          <line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/>
+          <line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/>
+        </g>
+      </svg>
+      <svg class="moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+        <path fill="currentColor" d="M20.6 14.6A8.8 8.8 0 0 1 9.4 3.4 9.2 9.2 0 1 0 20.6 14.6z"/>
+      </svg>
+    </button>
   </header>
 
   <main id="top">
@@ -45,7 +71,7 @@
           </a>
         </div>
 
-        <div class="mini-note">Manifest V3 · Chrome / Edge · 开源</div>
+        <div class="mini-note">Manifest V3 · Chrome / Edge · 开源 · 本地匹配优先</div>
       </div>
 
       <div class="hero-card" aria-label="RankLens preview">
@@ -60,33 +86,34 @@
 
           <div class="badges">
             <span class="badge ccf">CCF A</span>
-            <span class="badge sci">SCI 1区 · Top</span>
+            <span class="badge sci top">SCI 1区 <i>Top</i></span>
             <span class="badge xr">新锐 1区</span>
             <span class="badge ei">EI</span>
           </div>
 
           <div class="tooltip">
             <b>RankLens</b>
-            <span>Hover badges to inspect category, ranking and indexing details.</span>
+            <span>悬停徽标即可查看大类学科、分区位次、Top 标记与收录详情。</span>
           </div>
         </div>
 
         <div class="paper-card dim">
           <div class="paper-title">Robust Learning under Distribution Shift</div>
-          <div class="paper-meta">Publisher page</div>
+          <div class="paper-meta">Publisher page · journal home</div>
           <div class="badges">
             <span class="badge ccf b">CCF B</span>
             <span class="badge sci z2">SCI 2区</span>
+            <span class="badge ei stop">EI Stop</span>
           </div>
         </div>
       </div>
     </section>
 
     <section class="metrics wrap" id="coverage">
-      <div><strong>21,771+</strong><span>期刊名称索引</span></div>
-      <div><strong>38,449+</strong><span>ISSN 映射</span></div>
-      <div><strong>1,200+</strong><span>dblp 精确映射</span></div>
-      <div><strong>20+</strong><span>主流学术站点</span></div>
+      <div><strong>21,771</strong><span>期刊名称索引</span></div>
+      <div><strong>59,000+</strong><span>ISSN 精确映射</span></div>
+      <div><strong>1,237</strong><span>dblp 精确映射</span></div>
+      <div><strong>26+</strong><span>主流学术站点</span></div>
     </section>
 
     <section class="section wrap" id="features">
@@ -98,25 +125,25 @@
 
       <div class="feature-grid">
         <article>
-          <div class="icon">A</div>
+          <div class="icon ccf-ic">A</div>
           <h3>CCF 推荐等级</h3>
-          <p>直接显示 CCF A / B / C 等级，适合计算机领域会议与期刊快速识别。</p>
+          <p>直接显示 CCF A / B / C 等级，已对齐 2026 最新目录，适合计算机领域会议与期刊快速识别。</p>
         </article>
 
         <article>
-          <div class="icon">1</div>
+          <div class="icon sci-ic">1</div>
           <h3>中科院分区</h3>
-          <p>展示 1–4 区、Top、大类、位次与相关元数据，覆盖不止计算机学科。</p>
+          <p>展示 1–4 区、Top、大类、位次与预警信息；全学科 21,771 种期刊名称索引，不止计算机领域。</p>
         </article>
 
         <article>
-          <div class="icon">新</div>
+          <div class="icon xr-ic">新</div>
           <h3>新锐期刊分区</h3>
-          <p>补充分区、Top、数据库覆盖及审核警示信息，为选刊提供更多上下文。</p>
+          <p>原中科院分区团队出品的新锐分区表，补充分区、Top、数据库覆盖及审核警示，为选刊提供更多上下文。</p>
         </article>
 
         <article>
-          <div class="icon">EI</div>
+          <div class="icon ei-ic">EI</div>
           <h3>EI 可追溯状态</h3>
           <p>仅基于本地生成的 Elsevier Compendex 官方来源表快照显示，避免把推测当成事实。</p>
         </article>
@@ -130,12 +157,12 @@
         <article>
           <div class="icon">◈</div>
           <h3>隐私优先</h3>
-          <p>大部分匹配在本地完成，仅在本地无法识别 venue 时发起必要的元数据查询。</p>
+          <p>大部分匹配在本地完成，仅在本地无法识别 venue 时发起必要的元数据查询，且不上传浏览历史。</p>
         </article>
       </div>
     </section>
 
-    <section class="section wrap supported">
+    <section class="section wrap supported" id="sites">
       <div class="section-head">
         <span>Supported websites</span>
         <h2>覆盖研究工作流中的常用站点</h2>
@@ -152,12 +179,17 @@
         <span>SpringerLink</span>
         <span>ScienceDirect</span>
         <span>Wiley</span>
+        <span>Taylor & Francis</span>
+        <span>MDPI</span>
         <span>Nature</span>
         <span>arXiv</span>
         <span>OpenReview</span>
         <span>ACL Anthology</span>
+        <span>PMLR</span>
+        <span>NeurIPS Proceedings</span>
         <span>CVF Open Access</span>
         <span>USENIX</span>
+        <span>AAAI</span>
       </div>
     </section>
 
@@ -192,7 +224,7 @@
   <footer class="wrap">
     <div>
       <a class="brand small" href="#top">
-        <img src="https://raw.githubusercontent.com/xlnn/RankLens/main/icon/128x128.png" alt="" />
+        <img src="./icon.png" alt="" />
         <span>RankLens</span>
       </a>
       <p>Academic venue rankings at a glance.</p>

@@ -144,7 +144,7 @@ RankLens is an enhanced fork of [WenyanLiu/CCFrank4dblp](https://github.com/Weny
 
 <a id="中文"></a>
 
-# 中文1
+# 中文
 
 ## 项目简介
 

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="RankLens — 在学术检索、出版社与会议论文页面中快速识别 CCF、中科院、新锐与 EI 来源状态。" />
+  <meta name="theme-color" content="#080c18" />
+  <title>RankLens — Academic Venue Rankings at a Glance</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/xlnn/RankLens/main/icon/128x128.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header class="nav wrap">
+    <a class="brand" href="#top" aria-label="RankLens">
+      <img src="https://raw.githubusercontent.com/xlnn/RankLens/main/icon/128x128.png" alt="RankLens logo" />
+      <span>RankLens</span>
+    </a>
+    <nav>
+      <a href="#features">功能</a>
+      <a href="#coverage">覆盖</a>
+      <a href="#install">安装</a>
+      <a href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Academic venue intelligence · Browser extension</div>
+        <h1>一眼看懂论文所在<br /><span>期刊与会议等级</span></h1>
+        <p class="lead">
+          RankLens 将 <strong>CCF 推荐等级</strong>、<strong>中科院期刊分区</strong>、
+          <strong>新锐分区</strong> 与可追溯的 <strong>EI Compendex 来源状态</strong>
+          直接带到你常用的学术网页中。
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
+            获取 RankLens
+          </a>
+          <a class="btn ghost" href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">
+            查看源码
+          </a>
+        </div>
+
+        <div class="mini-note">Manifest V3 · Chrome / Edge · 开源</div>
+      </div>
+
+      <div class="hero-card" aria-label="RankLens preview">
+        <div class="window-bar">
+          <i></i><i></i><i></i>
+          <span>scholar.google.com</span>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-title">A Unified Framework for Trustworthy Multimodal Learning</div>
+          <div class="paper-meta">Journal / Conference venue</div>
+
+          <div class="badges">
+            <span class="badge ccf">CCF A</span>
+            <span class="badge sci">SCI 1区 · Top</span>
+            <span class="badge xr">新锐 1区</span>
+            <span class="badge ei">EI</span>
+          </div>
+
+          <div class="tooltip">
+            <b>RankLens</b>
+            <span>Hover badges to inspect category, ranking and indexing details.</span>
+          </div>
+        </div>
+
+        <div class="paper-card dim">
+          <div class="paper-title">Robust Learning under Distribution Shift</div>
+          <div class="paper-meta">Publisher page</div>
+          <div class="badges">
+            <span class="badge ccf b">CCF B</span>
+            <span class="badge sci z2">SCI 2区</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics wrap" id="coverage">
+      <div><strong>21,771+</strong><span>期刊名称索引</span></div>
+      <div><strong>38,449+</strong><span>ISSN 映射</span></div>
+      <div><strong>1,200+</strong><span>dblp 精确映射</span></div>
+      <div><strong>20+</strong><span>主流学术站点</span></div>
+    </section>
+
+    <section class="section wrap" id="features">
+      <div class="section-head">
+        <span>Why RankLens</span>
+        <h2>把“查等级”变成网页上的即时信息</h2>
+        <p>减少在不同榜单、检索库和出版社页面之间反复切换，把 venue-level 信息直接显示在论文旁边。</p>
+      </div>
+
+      <div class="feature-grid">
+        <article>
+          <div class="icon">A</div>
+          <h3>CCF 推荐等级</h3>
+          <p>直接显示 CCF A / B / C 等级，适合计算机领域会议与期刊快速识别。</p>
+        </article>
+
+        <article>
+          <div class="icon">1</div>
+          <h3>中科院分区</h3>
+          <p>展示 1–4 区、Top、大类、位次与相关元数据，覆盖不止计算机学科。</p>
+        </article>
+
+        <article>
+          <div class="icon">新</div>
+          <h3>新锐期刊分区</h3>
+          <p>补充分区、Top、数据库覆盖及审核警示信息，为选刊提供更多上下文。</p>
+        </article>
+
+        <article>
+          <div class="icon">EI</div>
+          <h3>EI 可追溯状态</h3>
+          <p>仅基于本地生成的 Elsevier Compendex 官方来源表快照显示，避免把推测当成事实。</p>
+        </article>
+
+        <article>
+          <div class="icon">◎</div>
+          <h3>智能匹配与回退</h3>
+          <p>优先使用 dblp、ISSN 与完整 venue 名称；必要时再通过 OpenAlex / Crossref 恢复元数据。</p>
+        </article>
+
+        <article>
+          <div class="icon">◈</div>
+          <h3>隐私优先</h3>
+          <p>大部分匹配在本地完成，仅在本地无法识别 venue 时发起必要的元数据查询。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap supported">
+      <div class="section-head">
+        <span>Supported websites</span>
+        <h2>覆盖研究工作流中的常用站点</h2>
+      </div>
+
+      <div class="site-cloud">
+        <span>dblp</span>
+        <span>Google Scholar</span>
+        <span>Semantic Scholar</span>
+        <span>Web of Science</span>
+        <span>Connected Papers</span>
+        <span>IEEE Xplore</span>
+        <span>ACM DL</span>
+        <span>SpringerLink</span>
+        <span>ScienceDirect</span>
+        <span>Wiley</span>
+        <span>Nature</span>
+        <span>arXiv</span>
+        <span>OpenReview</span>
+        <span>ACL Anthology</span>
+        <span>CVF Open Access</span>
+        <span>USENIX</span>
+      </div>
+    </section>
+
+    <section class="section wrap install" id="install">
+      <div class="install-copy">
+        <span class="kicker">Get started</span>
+        <h2>几分钟完成安装</h2>
+        <p>
+          下载源码或 Release，在 Chrome / Edge 中开启开发者模式并加载包含
+          <code>manifest.json</code> 的目录。
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
+            前往 Releases
+          </a>
+          <a class="btn ghost" href="https://github.com/xlnn/RankLens#installation" target="_blank" rel="noreferrer">
+            安装说明
+          </a>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li><b>01</b><span>下载或克隆 RankLens</span></li>
+        <li><b>02</b><span>打开 <code>chrome://extensions</code></span></li>
+        <li><b>03</b><span>开启 Developer mode</span></li>
+        <li><b>04</b><span>选择“Load unpacked”</span></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div>
+      <a class="brand small" href="#top">
+        <img src="https://raw.githubusercontent.com/xlnn/RankLens/main/icon/128x128.png" alt="" />
+        <span>RankLens</span>
+      </a>
+      <p>Academic venue rankings at a glance.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://github.com/xlnn/RankLens/blob/main/PrivacyPolicy.md" target="_blank" rel="noreferrer">Privacy</a>
+      <a href="https://github.com/xlnn/RankLens/blob/main/LICENSE" target="_blank" rel="noreferrer">License</a>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

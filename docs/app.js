@@ -1,4 +1,4 @@
-/* RankLens landing — theme switching, nav state, count-up + reveal animations */
+/* RankLens landing — theme switching, mobile menu, nav state, count-up + reveal animations */
 
 (function () {
   "use strict";
@@ -35,6 +35,37 @@
     else if (media.addListener) media.addListener(onSystemChange);
   }
 
+  /* ---------- mobile menu ---------- */
+
+  var nav = document.getElementById("nav");
+  var menuBtn = document.getElementById("menuBtn");
+  var mobileMenu = document.getElementById("mobileMenu");
+
+  function setMenu(open) {
+    if (!menuBtn || !mobileMenu) return;
+    menuBtn.classList.toggle("open", open);
+    mobileMenu.classList.toggle("open", open);
+    if (nav) nav.classList.toggle("menu-open", open);
+    document.body.classList.toggle("menu-open", open);
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
+  }
+
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", function () {
+      setMenu(!mobileMenu.classList.contains("open"));
+    });
+    mobileMenu.addEventListener("click", function (e) {
+      if (e.target && e.target.closest && e.target.closest("a")) setMenu(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setMenu(false);
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 900) setMenu(false);
+    });
+  }
+
   /* ---------- frozen animation clock fallback ----------
      A few embedded webviews never advance the animation clock
      (CSS + WAAPI), which would leave animated elements stuck at
@@ -62,7 +93,6 @@
 
   /* ---------- nav glass state ---------- */
 
-  var nav = document.getElementById("nav");
   if (nav) {
     var onScroll = function () {
       nav.classList.toggle("scrolled", window.scrollY > 12);

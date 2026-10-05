@@ -10,6 +10,7 @@
   <meta property="og:type" content="website" />
   <title>RankLens — 论文等级，一眼看见</title>
   <link rel="icon" href="./icon.png" />
+  <link rel="apple-touch-icon" href="./icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -24,6 +25,8 @@
       try { saved = localStorage.getItem("ranklens-theme"); } catch (e) {}
       var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
       document.documentElement.dataset.theme = theme;
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "light" ? "#f3f6fd" : "#060a17");
     })();
   </script>
 </head>
@@ -40,7 +43,7 @@
         <span>RankLens</span>
       </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="主导航">
         <a href="#features">功能</a>
         <a href="#how">用法</a>
         <a href="#sites">站点</a>
@@ -49,20 +52,44 @@
         </a>
       </nav>
 
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换暗色 / 亮色主题" title="切换主题">
-        <svg class="sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
-          <circle cx="12" cy="12" r="4.6" fill="currentColor"/>
-          <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/>
-            <line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/>
-            <line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/>
-            <line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/>
-          </g>
-        </svg>
-        <svg class="moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
-          <path fill="currentColor" d="M20.6 14.6A8.8 8.8 0 0 1 9.4 3.4 9.2 9.2 0 1 0 20.6 14.6z"/>
-        </svg>
-      </button>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换暗色 / 亮色主题" title="切换主题">
+          <svg class="sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.6" fill="currentColor"/>
+            <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/>
+              <line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/>
+              <line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/>
+              <line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/>
+            </g>
+          </svg>
+          <svg class="moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+            <path fill="currentColor" d="M20.6 14.6A8.8 8.8 0 0 1 9.4 3.4 9.2 9.2 0 1 0 20.6 14.6z"/>
+          </svg>
+        </button>
+
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="mm-links" aria-label="移动端导航">
+        <a href="#features">功能</a>
+        <a href="#how">用法</a>
+        <a href="#sites">站点</a>
+      </nav>
+      <div class="mm-actions">
+        <a class="btn primary" href="https://github.com/xlnn/RankLens/releases" target="_blank" rel="noreferrer">
+          免费安装扩展
+        </a>
+        <a class="btn ghost" href="https://github.com/xlnn/RankLens" target="_blank" rel="noreferrer">
+          查看源码 ↗
+        </a>
+      </div>
     </div>
   </header>
 
@@ -88,7 +115,12 @@
           </a>
         </div>
 
-        <div class="mini-note">Chrome · Edge · Firefox · Brave · Opera　|　MIT 开源　|　本地优先匹配　|　无分析服务器</div>
+        <div class="mini-note">
+          <span>Chrome · Edge · Firefox · Brave · Opera</span>
+          <span>MIT 开源</span>
+          <span>本地优先匹配</span>
+          <span>无分析服务器</span>
+        </div>
       </div>
 
       <div class="hero-stage" aria-label="RankLens 效果预览">
@@ -100,7 +132,8 @@
         <div class="hero-card">
           <div class="window-bar">
             <i></i><i></i><i></i>
-            <span>scholar.google.com</span>
+            <span class="win-url">scholar.google.com</span>
+            <span class="win-pill"><i></i>RankLens 已启用</span>
           </div>
 
           <div class="paper-list">
@@ -260,7 +293,12 @@
           查看源码 ↗
         </a>
       </div>
-      <div class="mini-note">开源（MIT）· Manifest V3 · 本地优先 · 无分析服务器</div>
+      <div class="mini-note">
+        <span>开源（MIT）</span>
+        <span>Manifest V3</span>
+        <span>本地优先</span>
+        <span>无分析服务器</span>
+      </div>
     </section>
   </main>
 
@@ -278,6 +316,8 @@
       <a href="https://github.com/xlnn/RankLens/blob/main/PrivacyPolicy.md" target="_blank" rel="noreferrer">隐私政策</a>
       <a href="https://github.com/xlnn/RankLens/blob/main/LICENSE" target="_blank" rel="noreferrer">License</a>
     </div>
+
+    <p class="copyright">© 2026 RankLens · MIT License</p>
   </footer>
 
   <script src="./app.js"></script>
